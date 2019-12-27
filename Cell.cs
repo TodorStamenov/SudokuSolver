@@ -1,5 +1,9 @@
+using System;
+
 public class Cell
 {
+    private int value;
+
     public Cell(int row, int col, int value)
     {
         this.Row = row;
@@ -11,14 +15,26 @@ public class Cell
 
     public int Col { get; }
 
-    public int Value { get; set; }
+    public int Value
+    {
+        get { return this.value; }
+        set
+        {
+            if (value < 0 || 9 < value)
+            {
+                throw new Exception("Cell value must be in range [1, 9]!");
+            }
 
-    public int Quadrant 
-    { 
+            this.value = value;
+        }
+    }
+
+    public int Quadrant
+    {
         get { return this.GetQuadrant(); }
     }
 
-    private int GetQuadrant() 
+    private int GetQuadrant()
     {
         if (0 <= this.Row && this.Row < 3 && 0 <= this.Col && this.Col < 3)
         {
